@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: 11
+    commands:
+      - apt-get update
+      - apt-get install -y wget
+      - wget -O- https://apt.corretto.aws/corretto.key | apt-key add -
+      - add-apt-repository 'deb https://apt.corretto.aws/ stable main'
+      - apt-get update
+      - apt-get install -y java-11-amazon-corretto-jdk maven
+
+build:
+  commands:
+    - mvn clean  # Clean up any existing build artifacts
+    - mvn package --file pom.xml  # Build your Maven project
+
+artifacts:
+  files:
+    - "**/*"
