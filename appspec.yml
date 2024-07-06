@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source: application.jar
-    destination: /opt/application  # Path on the EC2 instance where JAR will be deployed
+    destination: /opt/codedeploy-agent/deployment-root  # Path on the EC2 instance where JAR will be deployed
 
 permissions:
   - object: /opt/application/application.jar
