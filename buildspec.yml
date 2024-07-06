@@ -12,22 +12,10 @@ phases:
       - apt-get update
       - apt-get install -y java-11-amazon-corretto-jdk maven
 
-  pre_build:
-    commands:
-      - echo Pre-build phase...
-      - mvn clean  # Clean up any existing build artifacts
-
   build:
     commands:
-      - echo Build phase...
-      - mvn package --file pom.xml  # Build your Maven project
-      - ls -l target/  # Verify contents of target directory
-
-  post_build:
-    commands:
-      - echo Post-build phase...
-      - echo Build completed successfully.
+      - mvn clean package --file pom.xml
 
 artifacts:
   files:
-    - '**/target/application.jar'  # Adjust path if necessary, ensure it matches the Maven build output
+    - "**/*"
