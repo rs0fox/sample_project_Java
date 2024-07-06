@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: deploy/application.jar
+  - source: application.jar
     destination: /opt/application  # Path on the EC2 instance where JAR will be deployed
 
 permissions:
