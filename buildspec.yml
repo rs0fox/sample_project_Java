@@ -21,6 +21,7 @@ phases:
     commands:
       - echo Build phase...
       - mvn package --file pom.xml  # Build your Maven project
+      - ls -l target/  # Verify contents of target directory
 
   post_build:
     commands:
