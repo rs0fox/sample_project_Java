@@ -29,4 +29,4 @@ phases:
 
 artifacts:
   files:
-    - "**/*"  # Assuming your built jar is located in the target directory
+    - '**/target/application.jar'  # Adjust path if necessary, ensure it matches the Maven build output
