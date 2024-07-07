@@ -5,12 +5,12 @@ phases:
     runtime-versions:
       java: corretto11
     commands:
-      - apt-get update
-      - apt-get install -y wget gnupg
-      - wget -O- https://apt.corretto.aws/corretto.key | apt-key add -
-      - add-apt-repository 'deb https://apt.corretto.aws stable main'
-      - apt-get update
-      - apt-get install -y java-11-amazon-corretto-jdk maven
+      - sudo apt-get update
+      - sudo apt-get install -y wget gnupg
+      - wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add -
+      - sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+      - sudo apt-get update
+      - sudo apt-get install -y java-11-amazon-corretto-jdk maven
 
   build:
     commands:
@@ -18,5 +18,7 @@ phases:
 
 artifacts:
   files:
-    - target/application.jar
+    - '**/*'
   discard-paths: yes
+  base-directory: target
+  name: application.zip
