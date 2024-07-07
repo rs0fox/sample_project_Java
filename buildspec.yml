@@ -15,7 +15,7 @@ phases:
   build:
     commands:
       - mvn clean package --file pom.xml
-      - chmod +x target/before_install.sh  # Adjust path as per your project structure
+      - chmod +x before_install.sh  # Adjust path as per your project structure
 
 artifacts:
   files:
