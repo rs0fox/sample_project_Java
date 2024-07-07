@@ -1,41 +1,19 @@
 version: 0.0
 os: linux
-
 files:
-  - source: target/application.jar
-    destination: /opt/application/  # Path on the EC2 instance where JAR will be deployed
+  - source: /application.zip
+    destination: /opt/application/
+    overwrite: true
 
 permissions:
   - object: /opt/application/application.jar
-    pattern: "**"
-    owner: ec2-user  # Update with appropriate user
-    group: ec2-user  # Update with appropriate group
+    pattern: "**/*"
+    mode: 755
+    owner: ubuntu
+    group: ubuntu
 
 hooks:
-  ApplicationStop:
-    - location: stop_server.sh
-      timeout: 60
-      runas: root
-
-  BeforeInstall:
-    - location: before_install.sh
-      timeout: 300
-      runas: root
-
-  AfterInstall:
-    - location: after_install.sh
-      timeout: 300
-      runas: root
-
   ApplicationStart:
-    - location: start_server.sh
-      timeout: 60
-      runas: root
-
-resources:
-  - myApplication:
-      Type: AWS::EC2::Instance
-      Properties:
-        ServiceRole: AWSCodeDeployRole
-        LifecycleEventHookExecutionId: BeforeInstall
-        ScriptName: deploy.sh
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: ubuntu
