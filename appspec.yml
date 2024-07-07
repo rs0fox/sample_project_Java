@@ -1,19 +1,29 @@
 version: 0.0
 os: linux
+
 files:
-  - source: /application.zip
+  - source: target/application.jar
     destination: /opt/application/
-    overwrite: true
 
 permissions:
   - object: /opt/application/application.jar
-    pattern: "**/*"
-    mode: 755
+    pattern: "**"
     owner: ubuntu
     group: ubuntu
-
 hooks:
-  ApplicationStart:
-    - location: scripts/start_server.sh
+  ApplicationStop:
+    - location: stop_server.sh
+      timeout: 60
+      runas: ubuntu
+  BeforeInstall:
+    - location: before_install.sh
       timeout: 300
+      runas: ubuntu
+  AfterInstall:
+    - location: after_install.sh
+      timeout: 300
+      runas: ubuntu
+  ApplicationStart:
+    - location: start_server.sh
+      timeout: 60
       runas: ubuntu
